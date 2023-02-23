@@ -6,9 +6,7 @@ function App() {
   const [count, setCount] = useState(0)
   const [music, setMusic] = useState(null);
 
-
-
-  const audioTune = new Audio('<YOUR_AUDIO_FILE_PATH.mp3>');
+  const audioTune = new Audio(music);
 
   console.log(audioTune)
  
@@ -73,7 +71,7 @@ function App() {
         <input type="button" className="btn btn-danger mr-2" value="Stop" onClick={stopSound}></input>
         <label><input type="checkbox" checked={playInLoop} onChange={e => setPlayInLoop(e.target.checked)} /> Play in Loop</label>
       </div>
-      <input type="file" onChange={(e)=>{console.log(e)}}/>
+      <input type="file" onChange={(e)=>{setMusic(URL.createObjectURL(e.target.files[0]));}}/>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
