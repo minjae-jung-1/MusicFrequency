@@ -4,6 +4,7 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [music, setMusic] = useState(null);
 
   return (
     <div className="App">
@@ -19,6 +20,8 @@ function App() {
       <h1 className="text-3xl font-bold underline">
         Hello world!
       </h1>
+      <img src={music}></img>
+      <input type="file" onChange={(e)=>{console.log(e.files)}}/>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
