@@ -1,10 +1,17 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
-
+  const audioTune = new Audio('testSong.mp3')
+  const [playInLoop, setPlayInLoop] = useState(false)
+  useEffect(()=> {
+    audioTune.load()
+  },[])
+  const playSound = () => {
+    audioTune.play()
+  }
   return (
     <div className="App">
       <div>
@@ -23,6 +30,7 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
+        <input type = "button" value="Play" onClick={playSound}/>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
