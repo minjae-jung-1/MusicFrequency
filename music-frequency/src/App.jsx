@@ -5,18 +5,7 @@ import Canvas from "./components/Canvas"
 function App() {
   const [count, setCount] = useState(0)
   const [music, setMusic] = useState(null);
-
-  const audioTune = new Audio();
-  audioTune.src=music
-  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  console.log('audio',audioCtx)
-  let audioSource = null;
-  let analyser = null;
-  audioSource = audioCtx.createMediaElementSource(audioTune);
-  analyser = audioCtx.createAnalyser();
-  audioSource.connect(analyser);
-  analyser.connect(audioCtx.destination);
-  console.log(audioTune)
+  const audioTune = new Audio(music);
  
   // variable to play audio in loop
   const [playInLoop, setPlayInLoop] = useState(false);
@@ -54,7 +43,7 @@ function App() {
 
   return (
     <div className="App">
-      <Canvas />
+      {music != null ? <Canvas props={audioTune}/> : <div></div>}
       <h1 className="text-3xl font-bold underline">
         Hello world!
       </h1>

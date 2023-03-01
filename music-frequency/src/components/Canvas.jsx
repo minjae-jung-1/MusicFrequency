@@ -1,7 +1,32 @@
 import React, { useRef, useEffect } from 'react'
 
-const Canvas = props => {
-  
+const Canvas = (props) => {
+  let audioTune = props.audio
+  console.log(props.audio)
+  if(audioTune != null){
+    console.log('props',audioTune)
+  }
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+  console.log('audio',audioCtx)
+
+  let audioSource = null;
+  let analyser = null;
+  let bufferLength 
+  let dataArray 
+  let barWidth 
+
+  audioSource = audioCtx.createMediaElementSource(audioTune);
+  analyser = audioCtx.createAnalyser();
+  audioSource.connect(analyser);
+  analyser.connect(audioCtx.destination);
+  analyser.fftSize = 128;
+  bufferLength = analyser.frequencyBinCount;
+  dataArray = new Uint8Array(bufferLength);
+  barWidth= canvas.width / bufferLength;
+
+  console.log(audioTune)
+
   const canvasRef = useRef(null)
   
   const draw = ctx => {
