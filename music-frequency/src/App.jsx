@@ -1,22 +1,30 @@
 import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
 import './App.css'
+import Canvas from "./components/Canvas"
 
 function App() {
   const [count, setCount] = useState(0)
   const [music, setMusic] = useState(null);
 
-  const audioTune = new Audio(music);
-
+  const audioTune = new Audio();
+  audioTune.src=music
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  console.log('audio',audioCtx)
+  let audioSource = null;
+  let analyser = null;
+  audioSource = audioCtx.createMediaElementSource(audioTune);
+  analyser = audioCtx.createAnalyser();
+  audioSource.connect(analyser);
+  analyser.connect(audioCtx.destination);
   console.log(audioTune)
  
   // variable to play audio in loop
   const [playInLoop, setPlayInLoop] = useState(false);
  
   // load audio file on component load
-  useEffect(() => {
-    audioTune.load();
-  }, [])
+  // useEffect(() => {
+  //   audioTune.load();
+  // }, [])
  
   // set the loop of audio tune
   useEffect(() => {
@@ -38,29 +46,15 @@ function App() {
     audioTune.pause();
     audioTune.currentTime = 0;
   }
-//   const selectMusic = (e, file) => {
-//     if(file.size < 10485760 && file.type.includes('audio/')){
-//         const reader = new FileReader()
-
-//         reader.readAsDataURL(file)
-
-//         reader.onload = () => {
-//             console.log(reader)
-//         }
-//     }
-// }
+  // let canvas 
+  // let ctx = canvas.getContext('2d')
+  
+  // ctx.fillStyle = "green";
+  // ctx.fillRect(10, 10, 150, 100);
 
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
+      <Canvas />
       <h1 className="text-3xl font-bold underline">
         Hello world!
       </h1>
