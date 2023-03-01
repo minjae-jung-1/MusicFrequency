@@ -1,13 +1,8 @@
 import React, { useRef, useEffect } from 'react'
 
 const Canvas = (props) => {
-  let audioTune = props.audio
-  console.log(props.audio)
-  if(audioTune != null){
-    console.log('props',audioTune)
-  }
   const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
+  console.log(props)
   console.log('audio',audioCtx)
 
   let audioSource = null;

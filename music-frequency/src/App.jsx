@@ -3,10 +3,8 @@ import './App.css'
 import Canvas from "./components/Canvas"
 
 function App() {
-  const [count, setCount] = useState(0)
   const [music, setMusic] = useState(null);
   const audioTune = new Audio(music);
- 
   // variable to play audio in loop
   const [playInLoop, setPlayInLoop] = useState(false);
  
@@ -43,29 +41,17 @@ function App() {
 
   return (
     <div className="App">
-      {music != null ? <Canvas props={audioTune}/> : <div></div>}
+      {music != null ? <Canvas props={music}/> : <div></div>}
       <h1 className="text-3xl font-bold underline">
         Hello world!
       </h1>
-      {/* <img src={music}></img> */}
       <div>
         <input type="button" className="btn btn-primary mr-2" value="Play" onClick={playSound}></input>
         <input type="button" className="btn btn-warning mr-2" value="Pause" onClick={pauseSound}></input>
         <input type="button" className="btn btn-danger mr-2" value="Stop" onClick={stopSound}></input>
         <label><input type="checkbox" checked={playInLoop} onChange={e => setPlayInLoop(e.target.checked)} /> Play in Loop</label>
       </div>
-      <input type="file" onChange={(e)=>{setMusic(URL.createObjectURL(e.target.files[0]));}}/>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <input type="file" onChange={(e)=>setMusic(URL.createObjectURL(e.target.files[0]))}/>
     </div>
   )
 }
