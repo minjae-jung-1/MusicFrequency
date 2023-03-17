@@ -29,8 +29,8 @@ const AudioVisualizer = ({ music }) => {
     let x =0;
 
 
-    const renderFrame = () => {
-      requestAnimationFrame(renderFrame);
+    const draw = () => {
+      requestAnimationFrame(draw);
 
       x = 0;
 
@@ -53,7 +53,7 @@ const AudioVisualizer = ({ music }) => {
       });
     };
 
-    renderFrame();
+    draw();
 
     return () => {
       audioElement.pause();
@@ -79,7 +79,7 @@ const AudioVisualizer = ({ music }) => {
   
   return (
     <div>
-      <canvas ref={canvasRef} width={window.innerWidth*.8} height={window.innerHeight*.7}/>
+      <canvas ref={canvasRef} width={window.innerWidth*.8} height={window.innerHeight*.7} className="rounded-xl"/>
       <div>
         <input display="block" type="button" value="Play" onClick={playSound}></input>
         <input type="button" value="Pause" onClick={pauseSound}></input>
