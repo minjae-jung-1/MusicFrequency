@@ -1,31 +1,12 @@
 import React, { useRef, useEffect } from 'react'
 
-const Canvas = (props) => {
-  let audioTune = props.audio
-  console.log(props.audio)
-  if(audioTune != null){
-    console.log('props',audioTune)
-  }
+const Canvas = ({ props }) => {
   const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
-  console.log('audio',audioCtx)
-
-  let audioSource = null;
-  let analyser = null;
-  let bufferLength 
-  let dataArray 
-  let barWidth 
-
-  audioSource = audioCtx.createMediaElementSource(audioTune);
-  analyser = audioCtx.createAnalyser();
-  audioSource.connect(analyser);
-  analyser.connect(audioCtx.destination);
-  analyser.fftSize = 128;
-  bufferLength = analyser.frequencyBinCount;
-  dataArray = new Uint8Array(bufferLength);
-  barWidth= canvas.width / bufferLength;
-
-  console.log(audioTune)
+	
+	console.log('ayo im here', props);
+  let audioTune = props
+  let analyser = audioCtx.createAnalyser();
+  audioTune
 
   const canvasRef = useRef(null)
   
@@ -49,25 +30,3 @@ const Canvas = (props) => {
 }
 
 export default Canvas
-
-
-
-// import React from "react";
-// import Sketch from "react-p5";
-
-// 	let x = 50;
-// 	let y = 50;
-// export default (props) => {
-//   const setup = (p5, canvasParentRef) => {
-//     // (without that p5 will render the canvas outside of your component)
-//     p5.createCanvas(500, 500).parent(canvasParentRef);
-//   };
-
-//   const draw = (p5) => {
-//     p5.background(0);
-//       p5.ellipse(x, y, 70, 70);
-//     x++;
-//   };
-
-//   // return <Sketch setup={setup} draw={draw} />;
-// };
